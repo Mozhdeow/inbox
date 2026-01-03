@@ -1,13 +1,16 @@
-export const tickets = [{
-    "id": "TCK-1016",
-    "title": "Search not working properly",
-    "userName": "Leila Ahmadi",
-    "email": "leila.a@gmail.com",
-    "status": "open",
-    "priority": "medium",
-    "createdAt": "2025-12-29T22:40:00Z",
-    "messagesCount": 3
-},
+import {Ticket} from "@/lib/tickets/types";
+
+export const tickets: Ticket[] = [
+    {
+        "id": "TCK-1016",
+        "title": "Search not working properly",
+        "userName": "Leila Ahmadi",
+        "email": "leila.a@gmail.com",
+        "status": "open",
+        "priority": "medium",
+        "createdAt": "2025-12-29T22:40:00Z",
+        "messagesCount": 3
+    },
     {
         "id": "TCK-1017",
         "title": "Duplicate charge issue",
