@@ -40,7 +40,7 @@ const data = {
             title: "Inbox",
             url: "/tickets",
             icon: IconInbox,
-            count: 24,
+            count: 20,
         },
         {
             title: "Important",

@@ -9,7 +9,7 @@ import {MessageThread} from "@/components/tickets/MessageThread";
 import {TicketDetailSidebar} from "@/components/tickets/TicketDetailSidebar";
 import {Badge} from "@/components/ui/badge";
 import {Button} from "@/components/ui/button";
-import {Sheet, SheetContent, SheetTrigger} from "@/components/ui/sheet";
+import {Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger} from "@/components/ui/sheet";
 import {Menu} from "lucide-react";
 import Link from "next/link";
 import {saveTicketUpdate, applyTicketUpdates} from "@/lib/tickets/storage";
@@ -45,8 +45,12 @@ Also, I'd like to introduce you to David Boyd, who is interested in a Creative D
 
                     },
                 ]);
-            } catch (e: any) {
-                setError(e?.message ?? "Failed to load ticket");
+            } catch (e: unknown) {
+                if (e instanceof Error) {
+                    setError(e.message);
+                } else {
+                    setError("Failed to load ticket");
+                }
             } finally {
                 setIsLoading(false);
             }
@@ -101,8 +105,12 @@ Also, I'd like to introduce you to David Boyd, who is interested in a Creative D
                             <span>/</span>
                             <span className="text-foreground">Ticket details</span>
                         </div>
-                        {/* Mobile Sidebar Toggle */}
+                        {/* Mobile Sidebar */}
                         <Sheet>
+                            <SheetHeader>
+                                <SheetTitle></SheetTitle>
+                                <SheetDescription></SheetDescription>
+                            </SheetHeader>
                             <SheetTrigger asChild className="lg:hidden">
                                 <Button variant="outline" size="icon-sm">
                                     <Menu className="h-4 w-4"/>
@@ -115,7 +123,7 @@ Also, I'd like to introduce you to David Boyd, who is interested in a Creative D
                     </div>
                 </div>
 
-                {/* Content Area */}
+                {/* Content */}
                 <div className="flex-1 overflow-y-auto px-4 sm:px-6 py-4 sm:py-6">
                     <div className="mb-6">
                         <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-2">
@@ -124,7 +132,6 @@ Also, I'd like to introduce you to David Boyd, who is interested in a Creative D
                         </div>
                     </div>
 
-                    {/* Message Thread */}
                     <MessageThread messages={messages}/>
                 </div>
             </div>

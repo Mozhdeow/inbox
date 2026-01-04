@@ -8,16 +8,17 @@ import {Button} from "@/components/ui/button";
 import {Tooltip, TooltipContent, TooltipTrigger} from "@/components/ui/tooltip";
 import {cn} from "@/lib/utils";
 import {Star, Archive, Trash2, Mail, Clock} from "lucide-react";
-import {IconActivityHeartbeat, IconChartArrows} from "@tabler/icons-react";
 
 interface TicketCardProps {
     ticket: Ticket;
     onClick?: () => void;
+    isPinned: boolean;
+    onTogglePin: (id: string) => void;
 }
 
-export function TicketCard({ticket, onClick}: TicketCardProps) {
+export function TicketCard({ticket, onClick,isPinned,onTogglePin}: TicketCardProps) {
     const [isChecked, setIsChecked] = useState(false);
-    const [isPinned, setIsPinned] = useState(false);
+
     const [showActions, setShowActions] = useState(false);
 
     const formattedDate = format(new Date(ticket.createdAt), "MMM d, yyyy, h:mma");
@@ -26,11 +27,10 @@ export function TicketCard({ticket, onClick}: TicketCardProps) {
         setIsChecked(checked);
     };
 
-    const handlePinClick = (e: React.MouseEvent) => {
+    const handlePinClick: React.MouseEventHandler<HTMLButtonElement> = (e) => {
         e.stopPropagation();
-        setIsPinned(!isPinned);
+        onTogglePin(ticket.id);
     };
-
 
 
     return (

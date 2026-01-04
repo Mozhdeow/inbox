@@ -13,14 +13,15 @@ import {
 } from "@/components/ui/pagination";
 import {useSearchParams, useRouter, usePathname} from "next/navigation";
 import {useEffect} from "react";
-import Link from "next/link";
 
 interface TicketsListProps {
     tickets: Ticket[];
     itemsPerPage?: number;
+    isPinned: (id: string) => boolean;
+    onTogglePin: (id: string) => void;
 }
 
-export function TicketsList({tickets, itemsPerPage = 10}: TicketsListProps) {
+export function TicketsList({tickets, itemsPerPage = 10,isPinned,onTogglePin}: TicketsListProps) {
     const searchParams = useSearchParams();
     const router = useRouter();
     const pathname = usePathname();
@@ -70,7 +71,9 @@ export function TicketsList({tickets, itemsPerPage = 10}: TicketsListProps) {
                 {currentTickets.length > 0 ? (
                     currentTickets.map((ticket: Ticket) => (
                             <TicketCard ticket={ticket} key={ticket.id}
-                            onClick={()=>router.push(`/tickets/${ticket.id}`)}/>
+                            onClick={()=>router.push(`/tickets/${ticket.id}`)}
+                            isPinned={isPinned(ticket.id)}
+                            onTogglePin={onTogglePin}/>
                     ))
                 ) : (
                     <div className="text-center py-8 text-muted-foreground">

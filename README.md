@@ -1,10 +1,10 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
-
 ## Getting Started
 
 First, run the development server:
 
 ```bash
+npm install
+
 npm run dev
 # or
 yarn dev
@@ -16,21 +16,50 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Technical decisions
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### UI components
 
-## Learn More
+shadcn/ui (built on top of Radix UI) was selected because it:
 
-To learn more about Next.js, take a look at the following resources:
+Follows accessibility best practices
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Provides full control over component code
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Avoids dependency on heavy, opinionated UI libraries
 
-## Deploy on Vercel
+Integrates naturally with Tailwind CSS
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Styling
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Tailwind CSS is used to enable fast development and consistent styling.
+
+### State management and data handling
+
+Local React state is used, as it is sufficient for the scope of this project.
+
+Global state management was intentionally avoided to reduce unnecessary complexity.
+
+UI states such as loading, error, empty are handled explicitly.
+
+### Ticket pinning
+
+Pinned tickets are always displayed at the top of the list.
+
+Sorting order (newest/oldest) is preserved within pinned and unpinned groups.
+
+Pin state is persisted using localStorage.
+
+### Potential improvements
+
+Given more time, the following improvements would be considered:
+
+User interface customization, such as selectable or uploadable background images
+
+Dark mode support
+
+A dedicated page for pinned tickets with independent filtering
+
+Bulk actions for tickets
+
+Performance optimizations for large ticket lists

@@ -58,7 +58,7 @@ export const tickets: Ticket[] = [
         email: "sara.k@gmail.com",
         status: "open",
         priority: "high",
-        createdAt: "2025-12-29T12:40:00Z",
+        createdAt: "2022-01-29T12:40:00Z",
         messagesCount: 5,
     },
     {
@@ -68,7 +68,7 @@ export const tickets: Ticket[] = [
         email: "ali.r@gmail.com",
         status: "pending",
         priority: "medium",
-        createdAt: "2025-12-29T11:30:00Z",
+        createdAt: "2024-10-29T11:30:00Z",
         messagesCount: 2,
     },
     {
