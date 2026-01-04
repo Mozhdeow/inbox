@@ -1,6 +1,7 @@
 "use client"
 
 import {
+    type Icon,
     IconCreditCard,
     IconDotsVertical,
     IconLogout,
@@ -24,6 +25,7 @@ import {
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import {
+    SidebarGroup,
     SidebarMenu,
     SidebarMenuButton,
     SidebarMenuItem,
@@ -31,15 +33,13 @@ import {
 } from '@/components/ui/sidebar'
 import {StaticImageData} from "next/image";
 
-export function NavUser({
-                            user,
-                        }: {
-    user: {
-        name: string
-        email: string
-        avatar: string | StaticImageData
-    }
-}) {
+interface NavItem {
+    name: string
+    email: string
+    avatar: string | StaticImageData
+}
+
+export function NavUser({user,}: { user: NavItem }) {
     const {isMobile} = useSidebar()
 
     return (
@@ -73,12 +73,12 @@ export function NavUser({
                     </DropdownMenuTrigger>
                     <DropdownMenuContent
                         className="w-(--radix-dropdown-menu-trigger-width)
-    min-w-56
-    rounded-lg
-    bg-popover
-    text-popover-foreground
-    border border-border
-    shadow-md"
+                        min-w-56
+                        rounded-lg
+                        bg-popover
+                        text-popover-foreground
+                        border border-border
+                        shadow-md"
                         side={isMobile ? "bottom" : "right"}
                         align="end"
                         sideOffset={4}
@@ -106,7 +106,7 @@ export function NavUser({
                         </DropdownMenuLabel>
                         <DropdownMenuSeparator/>
                         <DropdownMenuGroup>
-                            <DropdownMenuItem >
+                            <DropdownMenuItem>
                                 <IconUserCircle/>
                                 Account
                             </DropdownMenuItem>
@@ -117,7 +117,7 @@ export function NavUser({
                         </DropdownMenuGroup>
                         <DropdownMenuSeparator/>
                         <DropdownMenuItem className="cursor-pointer focus:bg-rose-500 focus:text-white ">
-                            <IconLogout className='hover:text-white' />
+                            <IconLogout className='hover:text-white'/>
                             Log out
                         </DropdownMenuItem>
                     </DropdownMenuContent>

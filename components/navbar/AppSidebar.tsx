@@ -6,10 +6,10 @@ import {
     IconArchive,
     IconClock,
     IconHelp, IconInbox,
-    IconInnerShadowTop, IconLoader3,
+    IconLoader3,
     IconNotes,
-    IconSearch, IconSend,
-    IconSettings, IconStar, IconTrashX,
+    IconSend,
+    IconSettings, IconStar, IconTrash,
 } from "@tabler/icons-react"
 import {NavMain} from '@/components/navbar/NavMain'
 import {
@@ -26,6 +26,7 @@ import {NavSecondary} from "@/components/navbar/NavSecondary";
 import {NavOther} from "@/components/navbar/NavOther";
 import avatar from "@/public/avatar.png"
 import {Separator} from "@/components/ui/separator";
+import Link from "next/link";
 
 const data = {
     user: {
@@ -43,13 +44,13 @@ const data = {
         },
         {
             title: "Important",
-            url: "/tickets?view=pinned",
+            url: "#",
             icon: IconStar,
             count: 6,
         },
         {
             title: "Snoozed",
-            url: "/tickets?status=pending",
+            url: "#",
             icon: IconClock,
             count: 5,
         },
@@ -82,7 +83,7 @@ const data = {
     other: [
         {
             name: "Archived",
-            url: "/tickets?status=closed",
+            url: "/#",
             icon: IconArchive,
             count: 18,
         },
@@ -95,7 +96,7 @@ const data = {
         {
             name: "Trash",
             url: "#",
-            icon: IconTrashX,
+            icon: IconTrash,
             count: 3,
         },
     ],
@@ -106,19 +107,11 @@ export function AppSidebar({...props}: React.ComponentProps<typeof Sidebar>) {
     return (
         <Sidebar collapsible="offcanvas" {...props}>
             <SidebarHeader>
-                <SidebarMenu>
-                    <SidebarMenuItem>
-                        <SidebarMenuButton
-                            asChild
-                            className="data-[slot=sidebar-menu-button]:!p-1.5"
-                        >
-                            <a href="#">
-                                <IconLoader3 className="!size-8 text-primary"/>
-                                <span className="text-lg font-semibold">Inbox</span>
-                            </a>
-                        </SidebarMenuButton>
-                    </SidebarMenuItem>
-                </SidebarMenu>
+
+                <Link href="/" className='flex gap-3 items-center p-2'>
+                    <IconLoader3 className="!size-8 text-primary"/>
+                    <span className="sm:text-xl text-lg font-semibold">Inbox</span>
+                </Link>
             </SidebarHeader>
             <SidebarContent>
                 <NavMain items={data.navMain}/>
